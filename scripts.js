@@ -1,4 +1,3 @@
-
 // `https://getpantry.cloud/apiv1/pantry/d7528db1-c897-4ec6-a9de-4236da836ba3`
 
 // for creating the pantry
@@ -10,7 +9,7 @@
 // d7528db1-c897-4ec6-a9de-4236da836ba3
 
 // function createPantry () {
-//     fetch(`https://getpantry.cloud/apiv1/pantry/d7528db1-c897-4ec6-a9de-4236da836ba3`, 
+//     fetch(`https://getpantry.cloud/apiv1/pantry/d7528db1-c897-4ec6-a9de-4236da836ba3`,
 //         {
 //             method: 'GET'
 //         })
@@ -18,94 +17,92 @@
 //         .then(r => console.log(r))
 // }
 
-
-
-comments = document.getElementById('comments');
-textArea = document.querySelector('textarea')
-input = document.querySelector('input')
+comments = document.getElementById("comments");
+textArea = document.querySelector("textarea");
+input = document.querySelector("input");
 
 const commentApp = {
+  apiKey: "d7528db1-c897-4ec6-a9de-4236da836ba3",
+  basketName: "commentAppBasket",
 
-    apiKey: 'd7528db1-c897-4ec6-a9de-4236da836ba3',
-    basketName: 'commentAppBasket',
+  userClicksButton: function (event) {
+    event.preventDefault();
+    commentApp.getDataFromApi().then((response) => {
+      const temp = commentApp.collectCommentApp();
+      if (!temp.name || !temp.body) {
+        alert("please enter something in the form");
+      } else {
+        response.push(commentApp.collectCommentApp());
+        commentApp.writeCommentsToPage(response);
+        commentApp.writeToApi(response);
+        commentApp.clearCommentForm();
+      }
+    });
+  },
 
-    userClicksButton: function (event) {
-        event.preventDefault();
-        commentApp.getDataFromApi() 
-            .then(response => {
-                const temp = commentApp.collectCommentApp() 
-                if (!temp.name || ! temp.body) {
-                    alert('please enter something in the form')
-                }
-                else {
-                    response.push(commentApp.collectCommentApp());
-                    commentApp.writeCommentsToPage(response);
-                    commentApp.writeToApi(response);
-                    commentApp.clearCommentForm();
-                }
-            })
-    },
+  clearCommentForm: function () {
+    textArea.value = "";
+    input.value = "";
+  },
 
-    clearCommentForm: function () {
-        textArea.value = "";
-        input.value = "";
-    },
+  writeToApi: function (newArray) {
+    fetch(
+      `https://getpantry.cloud/apiv1/pantry/${commentApp.apiKey}/basket/${commentApp.basketName}`, // url
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          comments: newArray,
+        }),
+      }
+    );
+  },
 
-    writeToApi: function (newArray) {
-        fetch( 
-            `https://getpantry.cloud/apiv1/pantry/${commentApp.apiKey}/basket/${commentApp.basketName}`, // url
-            { 
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    comments: newArray,
-                })
-            })
-    },
+  collectCommentApp: function () {
+    return { name: input.value, body: textArea.value };
+  },
 
-    collectCommentApp: function () {
-        return {name: input.value, body: textArea.value}
-    },
+  getDataFromApi: function () {
+    return fetch(
+      `https://getpantry.cloud/apiv1/pantry/${commentApp.apiKey}/basket/${commentApp.basketName}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((r) => r.json())
+      .then((r) => r.comments || []);
+  },
 
-    getDataFromApi: function () {
-        return fetch(
-            `https://getpantry.cloud/apiv1/pantry/${commentApp.apiKey}/basket/${commentApp.basketName}`, 
-            {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-            .then(r => r.json())
-            .then(r => r.comments || []);
-    },
-    
-    loadComments: function () {
-        commentApp.getDataFromApi()
-            .then(response => commentApp.writeCommentsToPage(response))
-    },
+  loadComments: function () {
+    commentApp
+      .getDataFromApi()
+      .then((response) => commentApp.writeCommentsToPage(response));
+  },
 
-    writeCommentsToPage: function (commentArray) {
-        comments.innerHTML = "";
-        commentArray.forEach(i => {
-            const div = document.createElement('div');
-            const h2 = document.createElement('h2');
-                h2.textContent = i.name;
-            const p = document.createElement('p');
-                p.textContent = i.body;
-            div.append(h2, p);
-            comments.append(div);
-        })
-    },
+  writeCommentsToPage: function (commentArray) {
+    comments.innerHTML = "";
+    commentArray.forEach((i) => {
+      const div = document.createElement("div");
+      const h3 = document.createElement("h3");
+      h3.textContent = i.name;
+      const p = document.createElement("p");
+      p.textContent = i.body;
+      div.append(h3, p);
+      comments.append(div);
+    });
+  },
 
-    init: function () {
-        document.querySelector('form').addEventListener('submit', commentApp.userClicksButton)
-        commentApp.loadComments();
-    },
-}
+  init: function () {
+    document
+      .querySelector("form")
+      .addEventListener("submit", commentApp.userClicksButton);
+    commentApp.loadComments();
+  },
+};
 
 commentApp.init();
-
-

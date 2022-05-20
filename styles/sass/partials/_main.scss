@@ -1,0 +1,34 @@
+.wrapper {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// POST COMMENTS FORM
+form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  text-align: center;
+}
+
+// COMMENT POSTS
+.comments-section {
+  #comments {
+    display: flex;
+    flex-direction: column;
+    div {
+      margin: 10px 0;
+      padding: 5px;
+      background-color: cyan;
+    }
+  }
+}
+
+// MEDIA QUERIES
+@media (max-width: 500px) {
+  .wrapper {
+    width: 90%;
+  }
+}
