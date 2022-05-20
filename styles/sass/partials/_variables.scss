@@ -1,0 +1,8 @@
+$primary: #03256c;
+$secondary: #2541b2;
+$tertiary: #1768ac;
+$quaternary: #e5d549;
+
+@mixin border {
+    border-radius: 10px 10px;
+}

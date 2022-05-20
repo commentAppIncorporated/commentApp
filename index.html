@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-    <form action="">
-        <input type="text">
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>BLOG PAGE</h1>
+      <!-- Blog -->
+      <section class="blog">
+        <h2>BLOG TITLE</h2>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto magnam
+          atque deleniti error, excepturi nihil fugit. Consequatur perspiciatis
+          expedita blanditiis quae? Aut error quasi delectus saepe nesciunt
+          velit ipsum deleniti id sint doloribus incidunt voluptatem, quidem
+          illum adipisci quis, molestiae reiciendis, nostrum architecto est
+          dignissimos laudantium non unde hic? Earum laboriosam, assumenda enim
+          iusto sequi rem excepturi doloremque harum ut, quas aliquam repellat
+          eos ipsam reprehenderit omnis neque cum commodi quia deleniti sit
+          voluptatem quis itaque ex. Obcaecati pariatur quo consequatur minima
+          in dolor tenetur error natus perspiciatis eius. Temporibus voluptatum
+          quidem cumque nam, modi maiores magnam voluptatem illo sit?
+        </p>
+      </section>
+
+      <!-- Comments form -->
+      <form action="">
+        <h2>COMMENT</h2>
+        <input type="text" />
         <textarea name="" id="" cols="30" rows="10"></textarea>
         <button id="addCommentButton">Post Comment</button>
-    </form>
+      </form>
 
-    <section id="comments"></section>
+      <!-- Comments -->
+      <section class="comments-section">
+        <h2>COMMENTS SECTION</h2>
+        <div id="comments"></div>
+      </section>
+    </div>
 
     <script src="scripts.js"></script>
-</body>
+  </body>
 </html>
