@@ -27,17 +27,25 @@ const commentApp = {
 
   userClicksButton: function (event) {
     event.preventDefault();
-    commentApp.getDataFromApi().then((response) => {
-      const temp = commentApp.collectCommentApp();
-      if (!temp.name || !temp.body) {
-        alert("please enter something in the form");
-      } else {
-        response.push(commentApp.collectCommentApp());
-        commentApp.writeCommentsToPage(response);
-        commentApp.writeToApi(response);
-        commentApp.clearCommentForm();
-      }
-    });
+    const temp = commentApp.collectCommentApp();
+    if (!temp.name || !temp.body) {
+      alert("please enter something in the form");
+    } else {
+      commentApp
+        .checkProfanity(`${temp.name} ${temp.body}`)
+        .then((res) => {
+          if (res === "true") {
+            throw new Error("Stop cursing!");
+          }
+          commentApp.getDataFromApi().then((response) => {
+            response.push(commentApp.collectCommentApp());
+            commentApp.writeCommentsToPage(response);
+            commentApp.writeToApi(response);
+            commentApp.clearCommentForm();
+          });
+        })
+        .catch((err) => alert(err));
+    }
   },
 
   clearCommentForm: function () {
@@ -95,6 +103,12 @@ const commentApp = {
       div.append(h3, p);
       comments.append(div);
     });
+  },
+
+  checkProfanity: function (text) {
+    return fetch(
+      `https://www.purgomalum.com/service/containsprofanity?text=${text}`
+    ).then((res) => res.text());
   },
 
   init: function () {
