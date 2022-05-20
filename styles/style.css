@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Yantramanav:wght@400;700&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -253,10 +254,48 @@ template {
   overflow: hidden;
 }
 
+h1,
+h2,
+h3,
+p,
+input,
+button,
+textarea {
+  margin: 0;
+  color: #e5d549;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Yantramanav", sans-serif;
+  font-size: 2rem;
+}
+
 .wrapper {
   width: 70%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+body {
+  background: #03256c;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.blog {
+  background: #2541b2;
+  padding: 10px;
+  border-radius: 10px 10px;
+}
+.blog h2 {
+  margin: 10px 0;
 }
 
 form {
@@ -270,6 +309,19 @@ form {
           flex-direction: column;
   margin: 20px auto;
   text-align: center;
+  row-gap: 10px;
+}
+form input,
+form textarea {
+  background: #1768ac;
+  border-radius: 10px 10px;
+  border: 2px solid #e5d549;
+  padding: 10px;
+}
+form button {
+  border-radius: 10px 10px;
+  padding: 5px;
+  background-color: #2541b2;
 }
 
 .comments-section #comments {
@@ -283,18 +335,17 @@ form {
 }
 .comments-section #comments div {
   margin: 10px 0;
-  padding: 5px;
-  background-color: cyan;
+  padding: 10px;
+  background-color: #1768ac;
+  border-radius: 10px 10px;
 }
 
 @media (max-width: 500px) {
   .wrapper {
     width: 90%;
   }
-}
-h1,
-h2,
-h3,
-p {
-  margin: 0;
+
+  form {
+    width: auto;
+  }
 }

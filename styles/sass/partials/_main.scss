@@ -4,6 +4,25 @@
   margin: 0 auto;
 }
 
+body {
+  background: $primary;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+// BLOG POST
+.blog {
+  background: $secondary;
+  padding: 10px;
+  @include border;
+  h2 {
+    margin: 10px 0;
+  }
+}
+
 // POST COMMENTS FORM
 form {
   width: 50%;
@@ -11,6 +30,19 @@ form {
   flex-direction: column;
   margin: 20px auto;
   text-align: center;
+  row-gap: 10px;
+  input,
+  textarea {
+    background: $tertiary;
+    @include border;
+    border: 2px solid $quaternary;
+    padding: 10px;
+  }
+  button {
+    @include border;
+    padding: 5px;
+    background-color: $secondary;
+  }
 }
 
 // COMMENT POSTS
@@ -20,8 +52,9 @@ form {
     flex-direction: column;
     div {
       margin: 10px 0;
-      padding: 5px;
-      background-color: cyan;
+      padding: 10px;
+      background-color: $tertiary;
+      @include border;
     }
   }
 }
@@ -30,5 +63,9 @@ form {
 @media (max-width: 500px) {
   .wrapper {
     width: 90%;
+  }
+
+  form {
+    width: auto;
   }
 }
